@@ -1,0 +1,39 @@
+
+@media only screen and (max-width : 850px) {
+
+    nav {
+        padding: 0 20px;
+    }
+
+    .navbar .logo {
+        font-size: 1.8rem;        
+    }
+
+    #search-input {
+        width: 170px;
+        padding: 10px 10px;
+    }
+
+    .blog-card {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width : 450px) {
+
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar .logo {
+        font-size: 2rem;        
+    }
+
+    .search-container {
+        margin-top: 20px;
+    }
+
+    #search-input {
+        width: 200px;
+    }
+}
