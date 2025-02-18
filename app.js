@@ -1,61 +1,8 @@
-const apiKey = "4519ae95fcbb40978528fe359f854f9c";
 
 let blogContainer = document.getElementById("blog-container");
 let searchField = document.getElementById("search-input");
 let searchButton = document.getElementById("search-button");
 
-async function fetchRandomNews() {
-
-    try {
-
-        const apiUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&pagesize=10&apikey=${apiKey}`;
-
-        let response = await fetch(apiUrl);
-        let data = await response.json();
-        return data.articles;
-
-    } catch (error) {
-        console.log(error);
-        return [];
-
-    };
-
-};
-
-searchButton.addEventListener("click", async function () {
-
-    const query = searchField.value.trim();
-
-    if (query !== "") {
-
-        try {
-            const articles = await fetchQuery(query);
-            displayBlog(articles);
-        } catch (error) {
-            console.log("Error fetching by query", error);
-        };
-
-    };
-
-});
-
-async function fetchQuery(query) {
-
-    try {
-
-        const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pagesize=10&apikey=${apiKey}`;
-
-        let response = await fetch(apiUrl);
-        let data = await response.json();
-        return data.articles;
-
-    } catch (error) {
-        console.log(error);
-        return [];
-
-    };
-
-}
 
 function displayBlog(articles) {
 
@@ -91,6 +38,59 @@ function displayBlog(articles) {
     });
 
 };
+
+const API_KEY = window.config.API_KEY;
+
+async function fetchRandomNews() {
+
+    try {
+        const apiUrl = `https://newsapi.org/v2/top-headlines?sources=bbc-news&pagesize=10&apikey=${API_KEY}`;
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+        return data.articles;
+
+    } catch (error) {
+        console.log(error);
+        return [];
+
+    };
+
+};
+
+async function fetchQuery(query) {
+
+    try {
+        const apiUrl = `https://newsapi.org/v2/everything?q=${query}&pagesize=10&apikey=${API_KEY}`;
+
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+        return data.articles;
+
+    } catch (error) {
+        console.log(error);
+        return [];
+
+    };
+
+}
+
+searchButton.addEventListener("click", async function () {
+
+    const query = searchField.value.trim();
+
+    if (query !== "") {
+
+        try {
+            const articles = await fetchQuery(query);
+            displayBlog(articles);
+        } catch (error) {
+            console.log("Error fetching by query", error);
+        };
+
+    };
+
+});
+
 
 (async function () {
 
